@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6565743347246612"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            flex: 1;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: #ff5722;
+            font-weight: bold;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .logout:hover {
+            color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .button-container button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .button-container button:active {
+            transform: translateY(0);
+        }
+
+        main {
+            position: relative;
+        }
+
+        form {
+            display: none;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        form.active {
+            display: flex;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .alerts {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert.error {
+            background-color: #dc3545;
+        }
+
+        .alert.success {
+            background-color: #28a745;
+        }
+
+        small {
+            display: block;
+            margin-top: 5px;
+            color: #888;
+            font-size: 14px;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            text-align: center;
+            max-width: 90%;
+        }
+        
+        #popup.success {
+            border: 2px solid #28a745; /* Green border for success */
+        }
+        
+        #popup.error {
+            border: 2px solid #dc3545; /* Red border for error */
+        }
+        
+        #popup p {
+            font-size: 18px;
+            margin: 0;
+        }
+        
+        #popup button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        
+        #popup button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .button-container button {
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 18px;
+            }
+
+            .form-group input, .form-group select {
+                font-size: 14px;
+            }
+
+            button[type="submit"] {
+                font-size: 14px;
+            }
+
+            .button-container button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Admin Dashboard</h1>
+            <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+        </header>
+
+        <div class="button-container">
+            <button onclick="showForm('vendorForm')">Add Vendor</button>
+            <button onclick="showForm('organisationForm')">Add Organisation</button>
+            <button onclick="generateKey()">Generate Key</button>
+            <button onclick="showForm('searchForm')">Search Vendor/Organisation</button>
+        </div>
+
+        <main>
+            <!-- Add Vendor Form -->
+            <form id="vendorForm" method="post" action="{{ url_for('add_vendor') }}">
+                <h2>Add New Vendor</h2>
+                <div id="alerts"></div>
+                <div class="form-group">
+                    <label for="vendor_name">Shop Name</label>
+                    <input type="text" id="vendor_name" name="vendor_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="owner_name">Owner Name</label>
+                    <input type="text" id="owner_name" name="owner_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input type="tel" id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}" title="Enter a 10-digit mobile number." required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="Aadhar_card">Aadhar Card</label>
+                    <input type="number" id="Aadhar_card" name="Aadhar_card" pattern="[0-9]{12}" required>
+                </div>
+                <div class="form-group">
+                    <label for="pan_card">Pan Card</label>
+                    <input type="text" id="pan_card" name="pan_card" required>
+                </div>
+                <div class="form-group">
+                    <label for="accountnumber">Account Number</label>
+                    <input type="number" id="accountnumber" name="accountnumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="ifsc">IFSC Code</label>
+                    <input type="text" id="ifsc" name="ifsc" required>
+                </div>
+                <div class="form-group">
+                    <label for="upi">UPI Id</label>
+                    <input type="text" id="upi" name="upi" >
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="license_key">Enter License Key:</label>
+                    <input type="text" id="license_key" name="license_key" maxlength="19" required pattern="[A-Z0-9\-]{19}" placeholder="XXXX-XXXX-XXXX-XXXX">
+                    <small>Format: XXXX-XXXX-XXXX-XXXX</small>
+                </div>
+                <button type="submit">Add Vendor</button>
+            </form>
+
+            <!-- Add Organisation Form -->
+            <form id="organisationForm" method="post" action="{{ url_for('add_organisation') }}">
+                <h2>Add New Organisation</h2>
+                <div id="alerts"></div>
+                <div class="form-group">
+                    <label for="organisation_name">Organisation Name</label>
+                    <input type="text" id="organisation_name" name="organisation_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin_name">Admin Name</label>
+                    <input type="text" id="admin_name" name="admin_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobileNumber">Phone Number</label>
+                    <input type="tel" id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}" title="Enter a 10-digit phone number." required>
+                </div>
+                <div class="form-group">
+                    <label for="location">location</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="Aadhar_card">Aadhar Card</label>
+                    <input type="text" id="Aadhar_card" name="Aadhar_card" pattern="[0-9]{12}" required>
+                </div>
+                <div class="form-group">
+                    <label for="user_limit">User Limit</label>
+                    <input type="number" id="user_limit" name="user_limit" required>
+                </div>
+                <div class="form-group">
+                    <label for="license_key">Enter License Key:</label>
+                    <input type="text" id="license_key" name="license_key" maxlength="19" required pattern="[A-Z0-9\-]{19}" placeholder="XXXX-XXXX-XXXX-XXXX">
+                    <small>Format: XXXX-XXXX-XXXX-XXXX</small>
+                </div>
+                <button type="submit">Add Organisation</button>
+            </form>
+
+            <!-- Search Form -->
+            <form id="searchForm" style="display:none;">
+                <h2>Search Vendor/Organisation</h2>
+                <div class="form-group">
+                    <label for="searchType">Search Type</label>
+                    <select id="searchType" name="searchType" required>
+                        <option value="vendor">Vendor</option>
+                        <option value="organisation">Organisation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="searchTerm">Search Term</label>
+                    <input type="text" id="searchTerm" name="searchTerm" required>
+                </div>
+                <button type="button" onclick="searchVendorOrganisation()">Search</button>
+            </form>
+        </main>
+    </div>
+
+    <div id="popup"></div> <!-- Popup container -->
+
+    <script>
+        // Show different forms
+        function showForm(formId) {
+            document.querySelectorAll('form').forEach(form => {
+                form.style.display = 'none';
+            });
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        // Generate Key function
+        async function generateKey() {
+            try {
+                let response = await fetch('/admin/generate_key', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                let result = await response.json();
+                if (response.ok) {
+                    showPopup('success', `Generated Key: ${result.key}`);
+                } else {
+                    showPopup('error', result.message);
+                }
+            } catch (error) {
+                showPopup('error', 'Error generating the key.');
+            }
+        }
+
+        // Search Vendor/Organisation
+        async function searchVendorOrganisation() {
+            const searchType = document.getElementById('searchType').value;
+            const searchTerm = document.getElementById('searchTerm').value;
+        
+            try {
+                let response = await fetch('/admin/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ searchType, searchTerm }),
+                });
+            
+                let result = await response.json();
+                if (response.ok) {
+                    const data = result.data;
+                    let formattedResults = '';
+                
+                    data.forEach(item => {
+                        formattedResults += '<div><strong>Results:</strong><ul>';
+                        for (const [key, value] of Object.entries(item)) {
+                            formattedResults += `<li><strong>${key}:</strong> ${value}</li>`;
+                        }
+                        formattedResults += '</ul></div><hr>';
+                    });
+                
+                    showPopup('success', formattedResults);
+                } else {
+                    showPopup('error', result.message);
+                }
+            } catch (error) {
+                showPopup('error', 'Error searching for vendor/organisation.');
+            }
+        }
+
+
+        // Popup functions
+        function showPopup(type, message) {
+            var popup = document.getElementById('popup');
+            popup.className = ''; 
+            popup.classList.add(type); 
+            popup.innerHTML = `<p>${message}</p><button onclick="hidePopup()">OK</button>`;
+            popup.style.display = 'block';
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Show the Add Vendor form initially
+        showForm('vendorForm');
+    </script>
+</body>
+</html>

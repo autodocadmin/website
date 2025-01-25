@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6565743347246612"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Callback</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Popup styles */
+        #popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            text-align: center;
+        }
+
+        #popup.success {
+            border: 3px solid #28a745;
+        }
+
+        #popup.error {
+            border: 3px solid #dc3545;
+        }
+
+        #popup p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #popup button {
+            padding: 10px 30px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #popup button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Display the message -->
+    <div id="popup" class="">
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+    </div>
+
+    <!-- JS to handle popup -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('popup');
+            if (popup.querySelector('p').textContent) {
+                popup.style.display = 'block';  // Show popup if a message exists
+
+                // Set a timeout to automatically redirect after 5 seconds (5000 milliseconds)
+                window.location.href = '/';  
+            }
+        });
+    </script>
+
+</body>
+</html>

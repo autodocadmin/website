@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6565743347246612"
+  crossorigin="anonymous"></script>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AutoDoc</title>
+        <link rel="icon" href="{{ url_for('static', filename='assets/images/logowhite-modified.png') }}" type="image/png"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <!-- Google ads sense  -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6804705064327290"
+        crossorigin="anonymous"></script>
+
+        <!-- Essential SEO Meta Tags -->
+        <meta name="title" content="AutoDoc - Effortless Printing Always">
+        <meta name="description" content="AutoDoc offers seamless, secure, and automated printing services. Scan, upload, and print instantly at partnered shops, while keeping your data private.">
+        <meta name="keywords" content="AutoDoc, effortless printing, automated printing, secure printing, fast printing, QR code printing, privacy-focused printing, cloud printing, shopkeepers printing solution">
+        <meta name="author" content="AutoDoc Team">
+        <meta name="robots" content="index, follow"> <!-- Tells search engines to index and follow the site -->
+        <meta name="language" content="English">
+        
+        <!-- Open Graph Meta Tags for Social Sharing -->
+        <meta property="og:title" content="AutoDoc - Effortless Printing Always">
+        <meta property="og:description" content="AutoDoc makes printing fast, simple, and secure. Upload your files, pay online, and print instantly while keeping your data safe.">
+        <meta property="og:image" content="assets/images/cropped_image.png">
+        <meta property="og:url" content="https://www.theautodoc.in">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="AutoDoc">
+        
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="AutoDoc - Effortless Printing Always">
+        <meta name="twitter:description" content="AutoDoc automates and secures the printing process. Upload, pay, and print instantly.">
+        <meta name="twitter:image" content="{{ url_for('static', filename='assets/images/cropped_image.png') }}">
+        
+        <!-- Additional SEO Meta Tags -->
+        <meta name="subject" content="Automated printing services">
+        <meta name="coverage" content="Worldwide">
+        <meta name="distribution" content="Global">
+        <meta name="rating" content="General">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+        <link rel="stylesheet" href="edit.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+
+
+<style>
+    :root {
+    --primary-color: #008080;
+    --secondary-color: #e4fff6;
+    --text-color: #333;
+    --background-color: #fff;
+    --accent-color: #00a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+header {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo span {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+main {
+    padding-top: 40px;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    text-align: center;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 70px;
+        height: calc(100vh - 70px);
+        background-color: var(--background-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transition: right 0.5s ease;
+        padding-top: 2rem;
+    }
+
+    .nav-links li {
+        margin: 1.5rem 0;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .nav-active {
+        right: 0;
+    }
+
+}
+.content {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    margin: 0 10px;
+  }
+  .card {
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .output {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 30px;
+  }
+  input[type=email], input[type=tel] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+    width: 80%;
+    box-sizing: border-box;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #pay {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+    box-sizing: border-box;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+  #pay:hover {
+    background-color: #218838;
+  }
+  iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+   
+    .card {
+      margin: 20px auto;
+      padding: 15px;
+      max-width: 90%;
+    }
+    .output {
+      font-size: 20px;
+    }
+    input[type=email], input[type=tel] {
+      width: 100%;
+    }
+    #pay {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .output {
+      font-size: 18px;
+    }
+    
+    .card {
+      padding: 10px;
+    }
+    input[type=email], input[type=tel] {
+      font-size: 14px;
+    }
+    #pay {
+      font-size: 14px;
+    }
+  }
+
+
+
+</style>       
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='/assets/images/logoblack-modified.png') }}" alt="AutoDoc Logo">
+                <span>AutoDoc</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="https://www.theautodoc.in/#home">Home</a></li>
+                <li><a href="https://www.theautodoc.in/#features">Features</a></li>
+                <li><a href="https://www.theautodoc.in/#about">About Us</a></li>
+                <li><a href="https://www.theautodoc.in/#contact">Contact Us</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="content">
+                <div class="card">
+                  <div class="output">
+                    <p>Total Pages: {{ total_num_pages }}</p>
+                  </div>
+                  <form id="paymentForm" action="/{{ vendor_name }}/create_order" method="POST">
+                    <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" required>
+                    <input type="hidden" id="amount" name="amount" value="{{ amount }}">
+                    <button id="pay" type="submit">Pay Rs {{ amount / 100 }}</button>
+                  </form> 
+                  <br><br>
+                  <iframe src="/{{vendor_name }}/serve_pdf"></iframe>   
+                </div>
+              </div>
+        </section>
+        
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AutoDoc. All rights reserved.</p>
+    </footer>
+
+    <script>
+            const navSlide = () => {
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+    
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+            
+            navLinks.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+            
+            burger.classList.toggle('toggle');
+        });
+    }
+    
+    navSlide();
+    
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.remove('nav-active');
+            document.querySelector('.burger').classList.remove('toggle');
+        });
+    });
+    
+    </script>
+</body>
+</html>

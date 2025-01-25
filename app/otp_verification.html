@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AutoDoc</title>
+        <link rel="icon" href="{{ url_for('static', filename='assets/images/logowhite-modified.png') }}" type="image/png"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <!-- Google ads sense  -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6804705064327290"
+        crossorigin="anonymous"></script>
+
+        <!-- Essential SEO Meta Tags -->
+        <meta name="title" content="AutoDoc - Effortless Printing Always">
+        <meta name="description" content="AutoDoc offers seamless, secure, and automated printing services. Scan, upload, and print instantly at partnered shops, while keeping your data private.">
+        <meta name="keywords" content="AutoDoc, effortless printing, automated printing, secure printing, fast printing, QR code printing, privacy-focused printing, cloud printing, shopkeepers printing solution">
+        <meta name="author" content="AutoDoc Team">
+        <meta name="robots" content="index, follow"> <!-- Tells search engines to index and follow the site -->
+        <meta name="language" content="English">
+        
+        <!-- Open Graph Meta Tags for Social Sharing -->
+        <meta property="og:title" content="AutoDoc - Effortless Printing Always">
+        <meta property="og:description" content="AutoDoc makes printing fast, simple, and secure. Upload your files, pay online, and print instantly while keeping your data safe.">
+        <meta property="og:image" content="{{ url_for('static', filename='assets/images/cropped_image.png') }}">
+        <meta property="og:url" content="https://www.theautodoc.in">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="AutoDoc">
+        
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="AutoDoc - Effortless Printing Always">
+        <meta name="twitter:description" content="AutoDoc automates and secures the printing process. Upload, pay, and print instantly.">
+        <meta name="twitter:image" content="{{ url_for('static', filename='assets/images/cropped_image.png') }}">
+        
+        <!-- Additional SEO Meta Tags -->
+        <meta name="subject" content="Automated printing services">
+        <meta name="coverage" content="Worldwide">
+        <meta name="distribution" content="Global">
+        <meta name="rating" content="General">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/otp.css') }}">
+    
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-teal" href="#">
+                <img src="{{ url_for('static', filename='assets/images/logoblack-modified.png') }}" alt="" style="width: 40px;
+                height: 40px;
+                margin-right: 10px;"> AutoDoc
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.theautodoc.in/features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.theautodoc.in/how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.theautodoc.in/shopkeeper">For Shopkeepers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.theautodoc.in/faq">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+
+    </head>
+    <!-- OTP Verification Container -->
+    <div class="container1">
+        <div>
+            <h1>OTP Verification</h1>
+            <p>Please enter the OTP sent to <span id="email">{{ email }}</span></p>
+            {% if error %}
+                <p class="text-danger">{{ error }}</p>
+            {% endif %}
+            <form action="/verify-otp" method="POST">
+                <input type="hidden" name="email" value="{{ email }}">
+                <input type="text" name="otp" placeholder="Enter OTP" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>AutoDoc</h5>
+                    <p>Experience the future of printing today!</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.theautodoc.in/features" class="text-light">Features</a></li>
+                        <li><a href="https://www.theautodoc.in/how-it-works" class="text-light">How It Works</a></li>
+                        <li><a href="https://www.theautodoc.in/shopkeeper" class="text-light">For Shopkeepers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"><a href="mailto:support@theautodoc.in"></i> support@theautodoc.in</li></a>
+                        <li><i class="fas fa-phone me-2" style="transform: rotate(90deg);"></i> +91 9637308474</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 AutoDoc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+   
+
+
+    
+</body>
+</html>

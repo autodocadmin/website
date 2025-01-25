@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6565743347246612"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .alerts {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .alert.error {
+            background-color: #dc3545;
+        }
+
+        .alert.success {
+            background-color: #28a745;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            text-align: center;
+        }
+
+        #popup.success {
+            border: 3px solid #28a745;
+        }
+
+        #popup.error {
+            border: 3px solid #dc3545;
+        }
+
+        #popup p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #popup button {
+            padding: 10px 30px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #popup button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Animation */
+        .fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Management Login</h1>
+        <form id="loginForm" action="/private/{{ organisation }}/management" method="POST">
+            <div class="form-group">
+                <label for="admin_id">Admin ID</label>
+                <input type="text" id="admin_id" name="admin_id" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="popup" class="popup">
+        <p id="popupMessage"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+    <script>
+        const form = document.getElementById('loginForm');
+        const popup = document.getElementById('popup');
+        const popupMessage = document.getElementById('popupMessage');
+    
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            fetch('/private/{{ organisation }}/management', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    window.location.href = data.redirect_url;
+                } else {
+                    showPopup(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                showPopup('An error occurred. Please try again.', 'error');
+            });
+        };
+    
+        function showPopup(message, status) {
+            popupMessage.textContent = message;
+            popup.className = 'popup ' + (status === 'success' ? 'success' : 'error');
+            popup.style.display = 'block';
+        }
+    
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.venv/
+__pycache__
+=======
+.venv2/
+.vscode/
+Procfile
+.ebextensions/
+__pycache__/
+.dockerignore
+sample.py
+test.py
+

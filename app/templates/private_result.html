@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6565743347246612"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>Auto-Doc</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
+    }
+
+    header, footer {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .header-content, .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-content h1, .footer-content p {
+      margin: 0;
+    }
+
+    .header-content nav a, .footer-content a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s;
+    }
+
+    .header-content nav a:hover, .footer-content a:hover {
+      color: #007bff;
+    }
+
+    .content {
+      padding-top: 120px;
+      padding-bottom: 80px;
+    }
+
+    .card {
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .output {
+      font-size: 24px;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+
+    input[type=text], input[type=password] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 2px solid #ccc;
+      background-color: #fff;
+      outline: none;
+      font-size: 16px;
+      color: #333;
+      margin: 10px 0;
+      width: 80%;
+      box-sizing: border-box;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input[type=submit] {
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #28a745; /* Green color for the submit button */
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    input[type=submit]:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+
+    /* Popup styles */
+    #popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+    }
+
+    #popup.success {
+      border: 2px solid #28a745; /* Green border for success */
+    }
+
+    #popup.error {
+      border: 2px solid #dc3545; /* Red border for error */
+    }
+
+    #popup p {
+      font-size: 18px;
+    }
+
+    #popup button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #popup button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Auto-Doc</h1>
+      <nav>
+        <a href="#about">About Us</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+  <div class="content">
+    <div class="card">
+      <div class="output">
+        <p>Total Pages: {{ total_num_pages }}</p>
+      </div>
+      <form id="loginForm" action="/private/{{ organisation }}/authentication" method="POST">
+        <input type="text" id="user_id" name="user_id" placeholder="Enter your User ID" required>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+  <div id="popup" class="popup">
+    <p id="popupMessage"></p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2024 Auto-Doc. All rights reserved.</p>
+      <div>
+        <a href="#facebook">Facebook</a>
+        <a href="#twitter">Twitter</a>
+        <a href="#instagram">Instagram</a>
+        <a href="#linkedin">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const popup = document.getElementById('popup');
+    const popupMessage = document.getElementById('popupMessage');
+
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      
+      fetch(`/private/{{ organisation }}/authentication`, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          showPopup(data.message, 'success');
+          // If there's a redirect URL, wait for a moment before redirecting
+          if (data.redirect_url) {
+            setTimeout(() => {
+              window.location.href = data.redirect_url;
+            }, 2000); // Redirect after 2 seconds
+          }
+        } else {
+          showPopup(data.message, 'error');
+        }
+      })
+      .catch(error => {
+        showPopup('An error occurred. Please try again.', 'error');
+      });
+    };
+
+    function showPopup(message, status) {
+      popupMessage.textContent = message;
+      popup.className = status === 'success' ? 'success' : 'error';
+      popup.style.display = 'block';
+    }
+
+    function closePopup() {
+      popup.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

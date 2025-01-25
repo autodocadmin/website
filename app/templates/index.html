@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6565743347246612"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AutoDoc</title>
+        <link rel="icon" href="{{ url_for('static', filename='assets/images/logowhite-modified.png')}}" type="image/png"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <!-- Google ads sense  -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6804705064327290"
+        crossorigin="anonymous"></script>
+
+        <!-- Essential SEO Meta Tags -->
+        <meta name="title" content="AutoDoc - Effortless Printing Always">
+        <meta name="description" content="AutoDoc offers seamless, secure, and automated printing services. Scan, upload, and print instantly at partnered shops, while keeping your data private.">
+        <meta name="keywords" content="AutoDoc, effortless printing, automated printing, secure printing, fast printing, QR code printing, privacy-focused printing, cloud printing, shopkeepers printing solution">
+        <meta name="author" content="AutoDoc Team">
+        <meta name="robots" content="index, follow"> <!-- Tells search engines to index and follow the site -->
+        <meta name="language" content="English">
+        
+        <!-- Open Graph Meta Tags for Social Sharing -->
+        <meta property="og:title" content="AutoDoc - Effortless Printing Always">
+        <meta property="og:description" content="AutoDoc makes printing fast, simple, and secure. Upload your files, pay online, and print instantly while keeping your data safe.">
+        <meta property="og:image" content="{{ url_for('static', filename='assets/images/cropped_image.png') }}">
+        <meta property="og:url" content="https://www.theautodoc.in">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="AutoDoc">
+        
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="AutoDoc - Effortless Printing Always">
+        <meta name="twitter:description" content="AutoDoc automates and secures the printing process. Upload, pay, and print instantly.">
+        <meta name="twitter:image" content="{{ url_for('static', filename='assets/images/cropped_image.png')}}">
+        
+        <!-- Additional SEO Meta Tags -->
+        <meta name="subject" content="Automated printing services">
+        <meta name="coverage" content="Worldwide">
+        <meta name="distribution" content="Global">
+        <meta name="rating" content="General">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-teal" href="#">
+                <img src="{{url_for('static', filename='assets/images/logowhite-modified.png')}}" alt="" style="width: 40px;
+                height: 40px;
+                margin-right: 10px;"> AutoDoc
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#shopkeeper">For Shopkeepers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section bg-mint">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4"><span style="color: red;">No </span>Contact Sharing,<br> No <span style="color: red">Privacy Risks</span></h1>
+                    <p class="lead mb-4">Get your prints without sharing your mobile number or personal documents with strangers.</p>
+                    <button class="btn btn-teal btn-lg cta-button">Start Printing Now</button>
+                </div>
+                <div class="col-lg-6">
+                    <img src="{{url_for('static', filename='assets/images/herosection_copy.webp')}}" alt="Secure Printing" class="img-fluid rounded shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+
+
+     <section id="features" class="py-5" style="background-color: #E4FFF6;">
+        <div class="container text-center">
+          <h2 class="mb-4">Why Choose AutoDoc?</h2>
+          <div class="row">
+            <div class="col-md-4 col-12 mb-4">
+                <div class="feature-card p-3 shadow" style="background-color: white;">
+                  <img src="{{ url_for('static', filename='assets/images/collecting_doc_copy.webp')}}" alt="Cost-Effective" class="card-img-top img-fluid mb-3">
+                  <h4>Hassle-Free</h4>
+                  <p>No more long queues or awkward exchanges — upload, pay, and print seamlessly.</p>
+                </div>
+              </div>
+
+            <div class="col-md-4 col-12 mb-4">
+              <div class="feature-card p-3 shadow" style="background-color: white;">
+                <img src="{{ url_for('static', filename='assets/images/security.webp')}}" alt="Automated Workflow" class="card-img-top img-fluid mb-3">
+                <h4>Privacy Secured</h4>
+                <p>Your data is stored safely in the cloud and auto-deleted after 15 minutes</p>
+              </div>
+            </div>
+            
+            <div class="col-md-4 col-12 mb-4">
+              <div class="feature-card p-3 shadow" style="background-color: white;">
+                <img src="{{url_for('static', filename='assets/images/upi3_copy.webp')}}" alt="Secure Data Handling" class="card-img-top img-fluid mb-3">
+                <h4>Convenient Payments</h4>
+                <p>Accepts UPI and card payments for a cashless experience.</p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-padding bg-mint">
+        <div class="container">
+            <h2 class="text-center mb-5">Printing Made Effortless</h2>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="{{url_for('static', filename='assets/images/steps5_copy.png')}}" alt="How It Works" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-md-6">
+                    <div class="steps">
+                        <div class="mb-4">
+                            <h5><i class="fas fa-qrcode me-2 text-teal"></i> Scan & Upload</h5>
+                            <p>Scan the shop's QR code to access the upload portal.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-cog me-2 text-teal"></i> Set Preferences</h5>
+                            <p>Choose between portrait or landscape orientation, color or black-and-white, the number of copies, other.</p>
+                        </div>
+                        <div>
+                            <h5><i class="fas fa-print me-2 text-teal"></i> Pay & Print</h5>
+                            <p>Complete your payment securely online, and your printout starts automatically.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Trusted by Many</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="testimonial-card text-center">
+                            <i class="fas fa-quote-left fa-2x mb-3 text-teal"></i>
+                            <p class="lead">"I love the ease and speed of AutoDoc. No more waiting in line!"</p>
+                            <p class="fw-bold">- Tekchand Rambade</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-card text-center">
+                            <i class="fas fa-quote-left fa-2x mb-3 text-teal"></i>
+                            <p class="lead">"Finally, a way to print documents without sharing personal info with shopkeepers."</p>
+                            <p class="fw-bold">- Jatin Juneja</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopkeeper Section -->
+    <section id="shopkeeper" class="section-padding bg-teal">
+        <div class="container">
+            <h2 class="text-center mb-5">Empowering Shopkeepers</h2>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3 class="mb-4">Boost your earnings and efficiency</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-check-circle me-2"></i> Automated Printing: No need to interact manually</li>
+                        <li class="mb-3"><i class="fas fa-check-circle me-2"></i> Increased Revenue: Serve more customers efficiently</li>
+                        <li class="mb-3"><i class="fas fa-check-circle me-2"></i> Cost-Effective Solutions: Automated Software with lot's of features</li>
+                    </ul>
+                    <button class="btn btn-light btn-lg mt-3"><a href="https://theautodoc.in/" style="text-decoration: none; color: black;">Learn More</a></button>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{url_for('static', filename='assets/images/Shopkeeper_copy.png')}}" alt="Shopkeeper Benefits" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Is my data safe?
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, all documents are deleted within 15 minutes of printing. We take your privacy seriously.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            How do I pay?
+                        </button>
+                    </h3>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We support UPI, card payments, and other secure payment methods for your convenience.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Can I use this for large-scale office printing?
+                        </button>
+                    </h3>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Absolutely! AutoDoc is ideal for both personal and professional use, including large-scale office printing needs.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>AutoDoc</h5>
+                    <p>Experience the future of printing today!</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features" class="text-light">Features</a></li>
+                        <li><a href="#how-it-works" class="text-light">How It Works</a></li>
+                        <li><a href="#shopkeeper" class="text-light">For Shopkeepers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"><a href="mailto:support@theautodoc.in"></i> support@theautodoc.in</li></a>
+                        <li><i class="fas fa-phone me-2" style="transform: rotate(90deg);"></i> +91 9637308474, +91 7821895115</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 AutoDoc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/upload1ec.js') }}"></script>
+
+</body>
+</html>

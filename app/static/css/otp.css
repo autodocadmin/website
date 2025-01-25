@@ -1,0 +1,97 @@
+:root {
+    --primary: #008080;
+    --secondary: #E4FFF6;
+    --accent: #FF6347;
+    --gold: #FFD700;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    margin-bottom: 20px;
+}
+
+.section-padding {
+    padding: 5rem 0;
+}
+a{
+    text-decoration: none;
+    
+}
+
+@media screen and (max-width: 1200px) {
+
+    .hero-section{
+        margin-top: 20px;
+    }
+    .btn{
+        margin-bottom: 10px;
+    }
+
+    .steps{
+        margin-top: 20px;
+    }
+}
+
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+   
+    padding: 1rem;
+}
+
+.container1 div {
+    max-width: 400px;
+    width: 100%;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container1 h1 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.container1 p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.container1 input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+}
+
+.container1 button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.container1 button:hover {
+    background-color: #149898;
+}
+
+
+
