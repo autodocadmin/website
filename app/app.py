@@ -76,7 +76,7 @@ application = Flask(__name__,subdomain_matching=True)
 app = application
 Compress(app)
 app.secret_key = secrets.token_hex(32)
-app.config['SERVER_NAME'] = 'autodoc.test'
+app.config['SERVER_NAME'] = 'theautodoc.in'
 @app.before_request
 def ensure_session_accessed():
     session.modified = True
