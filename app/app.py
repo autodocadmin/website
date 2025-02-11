@@ -1,22 +1,30 @@
-from flask import Flask, request, render_template, jsonify, send_from_directory,redirect, url_for, flash, session, abort ,render_template_string,send_file,make_response
+from flask import Flask, request, render_template, jsonify, send_from_directory,redirect, url_for, flash, session,render_template_string,send_file
 from io import BytesIO
-import fitz,secrets,os,shutil,random,json,pyotp,pytz,pymongo,io
+import secrets
+import os
+import random
+import shortuuid
+import requests
+import pyotp
+import pytz
+import pymongo
+import io
 from flask_compress import Compress
-from payment import *
+from phonepe.payment import Payment_for_product,calculate_sha256_string,Phonepe
 from kafka.config import KafkaConfig
 from kafka.producer import KafkaProducer
 import csv
 from io import StringIO
-from minio_file_process import stream_to_minio
+from database.minio_file_process import stream_to_minio
 from minio import Minio
-from minio.error import S3Error
-from ms_processor import get_page_count,get_page_count2
-from pathlib import Path
+#from minio.error import S3Error
+from doc_process.ms_processor import get_page_count2
+#from pathlib import Path
 from bson import ObjectId
 from bson.binary import Binary
-from otp import otp_verification,send_license_key
+from smtp.otp import otp_verification,send_license_key
 from datetime import datetime, timedelta
-from multiprocessing import Process
+#from multiprocessing import Process
 from pypdf import PdfWriter ,PdfReader
 ist = pytz.timezone('Asia/Kolkata')
 
@@ -159,7 +167,7 @@ def verify_otp():
             '''
             return render_template_string(html_content)
         else:
-            html_content = f'''
+            html_content = '''
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -222,21 +230,21 @@ def callback():
             vendor_collection.insert_one({
                 "vendor_name": str(shop_name).replace(" ","").lower(),
                 "owner_name" :name,
-                "_id":mobile,
+                "_id":license_key,
                 "email":email,
-                "Aadhar card":None,
                 "Pan Card":None,
                 "Account Number":None,
                 "IFSC":None,
                 'UPI':None,
                 "location": location,
-                "license_key": license_key                
+                "Mobile_no": mobile
             })
             
             license_document = {
                 "_id": license_key,
                 "vendor_name": str(shop_name).replace(" ","").lower(),
-                "machine_id": machine_id,
+                "machine_id_1": machine_id,
+                "machine_id_2": None,
                 "registered": True,
                 "creation_date": datetime.utcnow().replace(tzinfo=pytz.utc),
                 "expiry_date": datetime.utcnow().replace(tzinfo=pytz.utc) + timedelta(days=365)}
@@ -245,14 +253,55 @@ def callback():
                         
             send_license_key(email, license_key,name,mobile,shop_name,location)
         return redirect(url_for('registration_success', email=email))
-    except:
+    except Exception as e:
+        print(e)
         return redirect(url_for('index_page'))
 
-app.route('/registration/success', methods=['GET'],subdomain='www')
+@app.route('/registration/success', methods=['GET'],subdomain='www')
 def registration_success():
     email = request.args.get('email')
     return f"Registration successful for {email}!"
 
+@app.route('/update_profile/<vendor_name>',subdomain='business')
+def update_profile(vendor_name):   
+
+    customer_name = request.args.get('name')
+    account_number = request.args.get('account_number')
+    ifsc = request.args.get('ifsc')
+    upi_id = request.args.get('upi_id')
+    pan = request.args.get('pan')   
+    location = request.args.get('location') 
+
+    request_param = ["owner_name","Account Number","ifsc","upi_id","pan","location"]
+    request_list = [customer_name,account_number,ifsc,upi_id,pan,location]
+    updated_dict = {}
+    # get the not null values from request list and instert only these values in updated dict
+    for i in range(len(request_list)):
+        if request_list[i] != "":
+            updated_dict[request_param[i]] = request_list[i]
+    
+    if updated_dict:  # Ensure there's something to update
+        vendor_collection.update_one(
+        {'vendor_name': vendor_name},
+        {"$set": updated_dict}
+        )
+    # create a  html here to show sucessfully update data and return here
+    html_content = f"""
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Profile Update</title>
+            </head>
+            <body>
+                <h1>Profile Update Successfully</h1>
+                {updated_dict}            
+            </body>
+            </html>
+    """
+    return render_template_string(html_content)
+            
 
 @app.route('/', subdomain="business")
 def business_home():
@@ -268,9 +317,9 @@ def business_home():
 @app.route('/<vendor_name>',subdomain='www')
 def upload_page(vendor_name):                                                     # Done
     validation = vendor_collection.find_one({"vendor_name": vendor_name })
-    if validation != None:
+    if validation:
         return render_template('upload.html', vendor_name=vendor_name)
-    else:
+    elif not validation:
         return redirect(url_for('index_page'))
 
 
@@ -595,6 +644,7 @@ def create_order(vendor_name):
             else:
                 return redirect(url_for("index_page"))
         except Exception as e:
+            print(e)
             return redirect(url_for("index_page"))
     
 @app.route('/<vendor_name>/payment_callback', methods=["GET",'POST'],subdomain='www')
@@ -670,6 +720,7 @@ def payment_callback(vendor_name):
         return redirect(url_for("index_page"))
         
     except Exception as e:
+        print(e)
         return redirect(url_for('index_page'))
 
 
@@ -686,7 +737,7 @@ organisation_collection = organisation_db['organisation_collection']
 @app.route("/<organisation>",subdomain="private")
 def private_index_page(organisation):                                            #Done
     validation = organisation_admin_collection.find_one({"organisation_name": organisation })
-    if validation != None:
+    if not validation:
         return render_template("private_upload.html",organisation=organisation)
     else:
         return redirect(url_for('index_page'))
@@ -1052,7 +1103,7 @@ def generate_key():                                                    # Done
         return redirect(url_for('admin_login'))    
     licenses = vendor_db["licenses"]
     flag = True
-    while flag == True:
+    while flag:
         
         uuid_value = generate_random_key()
 
@@ -1095,21 +1146,21 @@ def search_vendor_organisation():                                      # Done
         return jsonify({"status": "error", "message": " Record Not Found!"}), 400
 
 
-def delete_old_records_from_all_collections(db):
+# def delete_old_records_from_all_collections(db):
 
-    current_time = datetime.utcnow().replace(tzinfo=pytz.utc)
-    thirty_minutes = timedelta(minutes=15)
-    threshold_time = current_time - thirty_minutes
-    collections = db.list_collection_names()
+#     current_time = datetime.utcnow().replace(tzinfo=pytz.utc)
+#     thirty_minutes = timedelta(minutes=15)
+#     threshold_time = current_time - thirty_minutes
+#     collections = db.list_collection_names()
 
-    for collection_name in collections:
-        collection = db[collection_name]
+#     for collection_name in collections:
+#         collection = db[collection_name]
         
-        records_to_delete = collection.find({
-            'upload_time': {
-                '$lt': threshold_time}})
-        for record in records_to_delete:
-            result = collection.delete_one({'_id': record['_id']})
+#         records_to_delete = collection.find({
+#             'upload_time': {
+#                 '$lt': threshold_time}})
+#         for record in records_to_delete:
+#             result = collection.delete_one({'_id': record['_id']})
 
             
 #---------------------------------------------------------------------------------------#

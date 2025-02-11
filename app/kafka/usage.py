@@ -1,5 +1,5 @@
 from config import KafkaConfig
-from producer import KafkaProducer
+# from producer import KafkaProducer
 from consumer import KafkaConsumer
 import time
 from logger import logger
@@ -18,7 +18,7 @@ def main():
     # producer.flush()
     
     # Consumer example
-    consumer = KafkaConsumer(config, example_message_handler)
+    consumer = KafkaConsumer(config, example_message_handler,topic="pranitkalebere")
     consumer.start_consuming()
 
 if __name__ == "__main__":
